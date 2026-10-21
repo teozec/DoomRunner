@@ -2,9 +2,9 @@
 Name=Doom Runner
 Comment=Preset-oriented graphical launcher of various ported Doom engines
 Exec=DoomRunner
-Icon=DoomRunner
+Icon=io.github.Youda008.DoomRunner
 Type=Application
-Categories=Game
-X-Desktop-File-Install-Version=0.26
+Terminal=false
+Categories=Game;
 Keywords=first;person;shooter;launcher;
 StartupNotify=true

@@ -252,12 +252,31 @@ flatpak {
 
 #-- deployment -----------------------------------
 
-# add "INSTALL_DIR=/custom/path" to the qmake command to override this default value
-isEmpty(INSTALL_DIR): INSTALL_DIR = /usr/bin
+# Set default prefix if not specified (GNU standard: /usr/local for manual installs)
+isEmpty(PREFIX): PREFIX = /usr/local
 
-unix: !android
-{
-	target.path = $$INSTALL_DIR
+# Note: In qmake, use 'make install INSTALL_ROOT=/path' for staging (DESTDIR equivalent).
+# INSTALL_ROOT prepends the path to all installation targets.
+
+unix: !android {
+    # Binary - install to PREFIX/bin on all Unix systems
+    target.path = $$PREFIX/bin
+    INSTALLS += target
 }
 
-!isEmpty(target.path): INSTALLS += target
+linux: !android {
+    # Desktop file - Linux/Freedesktop specific
+    desktop.path = $$PREFIX/share/applications
+    desktop.files = Install/XDG/applications/*.desktop
+    INSTALLS += desktop
+
+    # AppStream metadata - Linux/Freedesktop specific
+    appdata.path = $$PREFIX/share/metainfo
+    appdata.files = Install/XDG/metainfo/*.metainfo.xml
+    INSTALLS += appdata
+
+    # Icons - Linux/Freedesktop specific
+    icons.path = $$PREFIX/share/icons
+    icons.files = Install/XDG/icons/hicolor
+    INSTALLS += icons
+}

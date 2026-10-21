@@ -63,9 +63,9 @@ if [ $INSTALL_METHOD == from_build ]; then
 		echo
 
 		echo "Installing desktop files"
-		copy "Install/XDG/$PROJECT_NAME.desktop" "/usr/share/applications/$PROJECT_NAME.desktop"
+		copy "Install/XDG/applications/io.github.Youda008.DoomRunner.desktop" "/usr/share/applications/io.github.Youda008.DoomRunner.desktop"
 		for SIZE in 16 24 32 48 64 128; do
-			copy "Install/XDG/$PROJECT_NAME.${SIZE}x${SIZE}.png" "/usr/share/icons/hicolor/${SIZE}x${SIZE}/apps/$PROJECT_NAME.png"
+			copy "Install/XDG/icons/hicolor/${SIZE}x${SIZE}/apps/io.github.Youda008.DoomRunner.png" "/usr/share/icons/hicolor/${SIZE}x${SIZE}/apps/io.github.Youda008.DoomRunner.png"
 		done
 
 	elif [ $OS_TYPE == MacOS ]; then

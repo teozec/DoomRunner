@@ -169,15 +169,15 @@ elif [ $PACKAGE_TYPE == deb ]; then
 	# copy executable
 	cp "$EXECUTABLE_PATH" "$STAGING_DIR/usr/bin/"
 
-	# copy desktop file and appdata
-	cp "$SOURCE_DIR/Install/XDG/$PROJECT_NAME.desktop" "$STAGING_DIR/usr/share/applications/"
-	cp "$SOURCE_DIR/Install/XDG/io.github.Youda008.DoomRunner.appdata.xml" "$STAGING_DIR/usr/share/metainfo/"
+	# copy desktop file and metainfo
+	cp "$SOURCE_DIR/Install/XDG/applications/io.github.Youda008.DoomRunner.desktop" "$STAGING_DIR/usr/share/applications/io.github.Youda008.DoomRunner.desktop"
+	cp "$SOURCE_DIR/Install/XDG/metainfo/io.github.Youda008.DoomRunner.metainfo.xml" "$STAGING_DIR/usr/share/metainfo/io.github.Youda008.DoomRunner.metainfo.xml"
 
 	# copy icons
 	for SIZE in 16 24 32 48 64 128; do
 		ICON_DIR="$STAGING_DIR/usr/share/icons/hicolor/${SIZE}x${SIZE}/apps"
 		mkdir -p "$ICON_DIR"
-		cp "$SOURCE_DIR/Install/XDG/$PROJECT_NAME.${SIZE}x${SIZE}.png" "$ICON_DIR/$PROJECT_NAME.png"
+		cp "$SOURCE_DIR/Install/XDG/icons/hicolor/${SIZE}x${SIZE}/apps/io.github.Youda008.DoomRunner.png" "$ICON_DIR/io.github.Youda008.DoomRunner.png"
 	done
 
 	# copy copyright
@@ -231,9 +231,9 @@ elif [ $PACKAGE_TYPE == appimage ]; then
 	echo
 	COMMAND="$DEPLOY_TOOL
       --executable \"$EXECUTABLE_PATH\"
-      --desktop-file \"$SOURCE_DIR/Install/XDG/$PROJECT_NAME.desktop\"
-      --icon-file \"$SOURCE_DIR/Install/XDG/$PROJECT_NAME.128x128.png\"
-      --icon-filename $PROJECT_NAME
+      --desktop-file \"$SOURCE_DIR/Install/XDG/applications/io.github.Youda008.DoomRunner.desktop\"
+      --icon-file \"$SOURCE_DIR/Install/XDG/icons/hicolor/128x128/apps/io.github.Youda008.DoomRunner.png\"
+      --icon-filename io.github.Youda008.DoomRunner
       --appdir \"$BUILD_DIR/AppDir\"
       --plugin qt
       --output appimage

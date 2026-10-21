@@ -34,18 +34,8 @@ modules:
     buildsystem: qmake
     config-opts:
       - CONFIG+=${BUILD_TYPE} flatpak
-      - INSTALL_DIR+=/app/bin
+      - PREFIX=/app
       - QMAKE_LIBDIR+=/app/lib
     sources:
       - type: dir
         path: ${SOURCE_DIR}
-    post-install:
-      # Patch desktop file using Flatpak references
-      - desktop-file-edit --set-icon=${FLATPAK_ID} Install/XDG/DoomRunner.desktop
-      # Install desktop file and icons
-      - install -Dm 644 Install/XDG/io.github.Youda008.DoomRunner.appdata.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -Dm 644 Install/XDG/DoomRunner.desktop /app/share/applications/${FLATPAK_ID}.desktop
-      - |
-        for size in 16 24 32 48 64 128; do
-          install -Dm644 Install/XDG/DoomRunner.${size}x${size}.png /app/share/icons/hicolor/${size}x${size}/apps/${FLATPAK_ID}.png
-        done
